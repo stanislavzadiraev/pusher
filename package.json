@@ -1,0 +1,17 @@
+{
+  "name": "mdlcfg",
+  "version": "0.0.1",
+  "keywords": ["not yet"],
+  "description": "not yet",
+  "license": "ISC",
+  "author": "https://github.com/stanislavzadiraev",
+  "homepage": "",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+
+
+
+  "type": "module"
+}
