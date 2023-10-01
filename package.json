@@ -20,7 +20,9 @@
     "mdlcfg": "github:stanislavzadiraev/mdlcfg"
   },
 
-  
+  "scripts": {
+    "mdlcfg": "mdlcfg"
+  },
 
   "type": "module"
 }
