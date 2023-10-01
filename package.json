@@ -24,5 +24,7 @@
     "mdlcfg": "mdlcfg"
   },
 
-  "type": "module"
+  "type": "module",
+  "main": "dst/index.js",
+  "bin": "bin/index.js"
 }
