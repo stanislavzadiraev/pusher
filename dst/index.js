@@ -1,5 +1,7 @@
 import {mkdir, rmdir} from 'node:fs/promises'
 
+const N = () => undefined
+
 const MKDIR = $ => mkdir($, {recursive: true}).catch(N)
 const RMDIR = $ => rmdir($, {recursive: true}).catch(N)
 
