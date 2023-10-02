@@ -12,7 +12,7 @@ const build = ({}) =>
         readFile('./node_modules/mdlcfg/bin/index.js')
     )
     .then(data =>
-        writeFile('./bin/index.js')
+        writeFile('./bin/index.js', data)
     )
 
 const prune = ({}) => 
