@@ -2,7 +2,7 @@
 
 process.removeAllListeners("warning");
 
-const N = () => undefined;
+const N = () => {};
 
 const I = " - ";
 const C = "../";
