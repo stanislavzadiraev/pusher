@@ -15,18 +15,15 @@ const theslug =
 	"dst";
 
 Promise.all([
-	import(curpath + "package.json", { assert: { type: "json" } }),
-	import(parpath + "package.json", { assert: { type: "json" } }),
+	import(curpath + "package.json", { assert: { type: "json" } }).then(
+		({ default: { name } }) => name
+	),
+	import(parpath + "package.json", { assert: { type: "json" } }).then(
+		({ default: { name } }) => name
+	),
 ])
 	.then(
-		([
-			{
-				default: { name: curname },
-			},
-			{
-				default: { name: parname },
-			},
-		]) => (
+		([curname, parname]) => (
 			(process.title = "node" + I + parname + I + curname),
 			Promise.all([
 				import(curpath + theslug + "/index.js").catch(N),
