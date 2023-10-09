@@ -31,5 +31,5 @@ Promise.all([
 		)
 	)
 	.then(([{ default: mdl }, { default: cfg }]) =>
-		process.argv.slice(2).reduce((acc, cur) => acc && acc[cur], mdl)(cfg)
+		process.argv.slice(2).reduce((acc, cur) => acc[cur], mdl)(cfg)
 	);
