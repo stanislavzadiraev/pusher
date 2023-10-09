@@ -18,7 +18,7 @@ const prune = () =>
 	RMDIR("bin")
 		.then(() => readFile("./package.json"))
 		.then((data) => JSON.parse(data))
-		.then((json) => JSON.stringify((delete json["bin"], json)))
+		.then((json) => JSON.stringify((delete json["bin"], json), null, 2))
 		.then((data) => writeFile("./package.json", data));
 
 export default { build, prune };
