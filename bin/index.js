@@ -1,37 +1,35 @@
 #!/usr/bin/env node
 
-process.removeAllListeners("warning");
+process.title = 'node'
+process.removeAllListeners('warning')
 
-const log = ($) => (console.log($), $);
+const I = ' - '
+const C = '../'
 
-const N = () => ({});
+const curpath = new Array(1).fill(C).join('')
+const parpath = new Array(3).fill(C).join('')
 
-const NEST = ($) => new Array($).fill("../").join("");
+const mdlname = ['src', 'dst'][1]
 
-const curpath = NEST(1);
-const parpath = NEST(3);
-
-const theslug =
-	//  "src";
-	"dst";
-
-Promise.all([
-	import(curpath + "package.json", { assert: { type: "json" } }).then(
-		({ default: { name } }) => name
-	),
-	import(parpath + "package.json", { assert: { type: "json" } }).then(
-		({ default: { name } }) => name
-	),
+Promise
+.all([
+  import(curpath + 'package.json', { assert: { type: 'json' } }),
+  import(parpath + 'package.json', { assert: { type: 'json' } }),
 ])
-	.then(
-		([curname, parname]) => (
-			(process.title = [process.title, parname, curname].join(" - ")),
-			Promise.all([
-				import(curpath + theslug + "/index.js").catch(N),
-				import(parpath + curname + ".config.js").catch(N),
-			])
-		)
-	)
-	.then(([{ default: mdl }, { default: cfg }]) =>
-		process.argv.slice(2).reduce((acc, cur) => acc[cur], log(mdl))(log(cfg))
-	);
+.then(([
+  {default: {name: curname}},
+  {default: {name: parname}},
+]) => (
+  process.title += I + parname + I + curname,
+  Promise
+  .all([
+    import(curpath + mdlname + '/index.js'),
+    import(parpath + curname + '.config.js'),
+  ])
+))
+.then(([
+  {default: mdl},
+  {default: cfg},
+]) => 
+  process.argv.slice(2).reduce((acc, cur) => acc && acc[cur], mdl)(cfg)
+)
