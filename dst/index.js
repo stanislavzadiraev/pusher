@@ -19,7 +19,8 @@ const editjson = (name, data) =>
 				null,
 				2
 			)
-		);
+		)
+		.then((data) => writeFile(name, data));
 
 const build = () =>
 	MKDIR("bin")
