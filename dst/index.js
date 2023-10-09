@@ -9,7 +9,15 @@ const build = () =>
 	MKDIR("bin")
 		.then(() => readFile("./node_modules/mdlcfg/bin/index.js"))
 		.then((data) => writeFile("./bin/index.js", data))
+		.then(() => readFile("./package.json"))
+		.then((data) => JSON.parse(data))
+		.then((json) => JSON.stringify((json["bin"] = "bin/index.js", json)))
+		.then((data) => writeFile("./bin/index.js", data));
 
-const prune = () => RMDIR("bin");
-
+const prune = () => 
+	RMDIR("bin")
+	.then(() => readFile("./package.json"))
+	.then((data) => JSON.parse(data))
+	.then((json) => JSON.stringify((delete json["bin"], json)))
+	.then((data) => writeFile("./bin/index.js", data));
 export default { build, prune };
