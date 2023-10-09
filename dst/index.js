@@ -12,12 +12,12 @@ const build = () =>
 		.then(() => readFile("./package.json"))
 		.then((data) => JSON.parse(data))
 		.then((json) => JSON.stringify((json["bin"] = "bin/index.js", json)))
-		.then((data) => writeFile("./bin/index.js", data));
+		.then((data) => writeFile("./package.json", data));
 
 const prune = () => 
 	RMDIR("bin")
 	.then(() => readFile("./package.json"))
 	.then((data) => JSON.parse(data))
 	.then((json) => JSON.stringify((delete json["bin"], json)))
-	.then((data) => writeFile("./bin/index.js", data));
+	.then((data) => writeFile("./package.json", data));
 export default { build, prune };
