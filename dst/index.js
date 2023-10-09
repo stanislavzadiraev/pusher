@@ -28,6 +28,6 @@ const build = () =>
 		.then(() => editjson("./package.json", { bin: "bin/index.js" }));
 
 const prune = () =>
-	RMDIR("bin").then(() => editjson("./package.json", { bin: unefined }));
+	RMDIR("bin").then(() => editjson("./package.json", { bin: undefined }));
 
 export default { build, prune };
