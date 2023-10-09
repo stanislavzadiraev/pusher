@@ -1,11 +1,8 @@
 process.removeAllListeners("warning");
 
-
 const N = () => ({});
 
-const I = " - ";
-
-const NEST = $ => new Array($).fill("../").join("")
+const NEST = ($) => new Array($).fill("../").join("");
 
 const curpath = NEST(1);
 const parpath = NEST(3);
