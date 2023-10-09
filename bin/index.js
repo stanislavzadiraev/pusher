@@ -27,11 +27,11 @@ Promise.all([
 		([curname, parname]) => (
 			(process.title = [process.title, parname, curname].join(" - ")),
 			Promise.all([
-				import(log(curpath + theslug + "/index.js")).catch(N),
-				import(log(parpath + curname + ".config.js")).catch(N),
+				import(curpath + theslug + "/index.js").catch(N),
+				import(parpath + curname + ".config.js").catch(N),
 			])
 		)
 	)
 	.then(([{ default: mdl }, { default: cfg }]) =>
-		process.argv.slice(2).reduce((acc, cur) => acc[cur], mdl)(cfg)
+		process.argv.slice(2).reduce((acc, cur) => acc[cur], log(mdl))(log(cfg))
 	);
