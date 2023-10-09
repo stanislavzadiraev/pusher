@@ -2,19 +2,25 @@
 
 process.removeAllListeners("warning");
 
+
 const N = () => ({});
 
-const NEST = ($) => new Array($).fill("../").join("");
+const I = " - ";
+
+const NEST = $ => new Array($).fill("../").join("")
+
+const curpath = NEST(1);
+const parpath = NEST(3);
 
 const theslug =
 	//  "src";
 	"dst";
 
 Promise.all([
-	import(NEST(1) + "package.json", { assert: { type: "json" } }).then(
+	import(curpath + "package.json", { assert: { type: "json" } }).then(
 		({ default: { name } }) => name
 	),
-	import(NEST(3) + "package.json", { assert: { type: "json" } }).then(
+	import(parpath + "package.json", { assert: { type: "json" } }).then(
 		({ default: { name } }) => name
 	),
 ])
