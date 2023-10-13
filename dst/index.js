@@ -1,9 +1,4 @@
-import { mkdir, rmdir, readFile, writeFile } from "node:fs/promises";
-
-const U = () => undefined;
-
-const MKDIR = ($) => mkdir($, { recursive: true }).catch(U);
-const RMDIR = ($) => rmdir($, { recursive: true }).catch(U);
+import { readFile, writeFile, cp, rm } from "node:fs/promises";
 
 const editjson = (name, data) =>
 	readFile(name)
@@ -15,7 +10,7 @@ const editjson = (name, data) =>
 						(ent[1] == undefined && (delete json[ent[0]], true)) ||
 						((json[ent[0]] = ent[1]), true)
 				),
-				json),
+					json),
 				null,
 				2
 			)
@@ -23,12 +18,11 @@ const editjson = (name, data) =>
 		.then((data) => writeFile(name, data));
 
 const build = () =>
-	MKDIR("bin")
-		.then(() => readFile("./node_modules/mdlcfg/bin/index.js"))
-		.then((data) => writeFile("./bin/index.js", data))
+	cp("./node_modules/mdlcfg/bin/", "./bin/", { recursive: true })
 		.then(() => editjson("./package.json", { bin: "bin/index.js" }));
 
 const prune = () =>
-	RMDIR("bin").then(() => editjson("./package.json", { bin: undefined }));
+	rm("./bin/", { recursive: true })
+		.then(() => editjson("./package.json", { bin: undefined }));
 
 export default { build, prune };
