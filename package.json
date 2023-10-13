@@ -16,7 +16,7 @@
     "url": "https://github.com/stanislavzadiraev/pusher/issues"
   },
   "devDependencies": {
-    "mdlcfg": "github:stanislavzadiraev/pusher"
+    "pusher": "github:stanislavzadiraev/pusher"
   },
   "scripts": {
     "pusher": "pusher"
