@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-import { readFile } from 'node:fs/promises';
-import { join } from 'node:path';
+import { readFile } from 'node:fs/promises'
+import { join } from 'node:path'
 
 readFile(new URL(join('..', 'package.json'), import.meta.url))
 	.then(data => JSON.parse(data))
@@ -12,13 +12,15 @@ readFile(new URL(join('..', 'package.json'), import.meta.url))
 	)
 	.then(({ name, main }) =>
 		Promise.all([
-			import(join('..', main)).catch(() => ({ default: undefined })),
-			import(join('..', '..', '..', `${name}.config.js`)).catch(() => ({ default: undefined })),
+			import(join('..', main))
+				.catch(() => ({ default: undefined })),
+			import(join('..', '..', '..', `${name}.config.js`))
+				.catch(() => ({ default: undefined })),
 		])
 	)
 	.then(([
-		{ default: mdl },
-		{ default: cfg },
+		{ default: proc },
+		{ default: conf },
 	]) =>
-		process.argv.slice(2).reduce((acc, cur) => acc[cur], mdl)(cfg)
+		process.argv.slice(2).reduce((acc, cur) => acc[cur], proc)(conf)
 	)

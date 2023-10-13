@@ -1,5 +1,5 @@
-import { readFile, writeFile, cp, rm } from "node:fs/promises"
-import { join } from "node:path"
+import { readFile, writeFile, cp, rm } from 'node:fs/promises'
+import { join } from 'node:path'
 
 const editjson = (name, data) =>
 	readFile(name)
@@ -16,7 +16,7 @@ const editjson = (name, data) =>
 			null,
 			2
 		))
-		.then(data => writeFile(name, data));
+		.then(data => writeFile(name, data))
 
 const build = () =>
 	readFile(new URL(join('..', 'package.json'), import.meta.url))
@@ -30,12 +30,12 @@ const build = () =>
 				cp(new URL(join('..', 'bin'), import.meta.url), 'bin', { recursive: true }),
 				editjson('package.json', { bin }),
 			])
-		);
+		)
 
 const prune = () =>
 	Promise.all([
 		rm('bin', { recursive: true }),
 		editjson('package.json', { bin: undefined }),
-	]);
+	])
 
-export default { build, prune };
+export default { build, prune }
