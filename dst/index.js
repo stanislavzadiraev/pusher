@@ -1,5 +1,5 @@
 import { readFile, writeFile, cp, rm } from 'node:fs/promises'
-import { join } from 'node:path'
+import { join, dirname } from 'node:path'
 
 const editjson = (name, data) =>
 	readFile(name)
@@ -22,20 +22,20 @@ const build = () =>
 	readFile(new URL(join('..', 'package.json'), import.meta.url))
 		.then(data => JSON.parse(data))
 		.then(({ bin }) =>
-			(!bin && Promise.reject(new Error("bin lost"))) ||
-			Promise.resolve({ bin })
-		)
-		.then(({ bin }) =>
 			Promise.all([
-				cp(new URL(join('..', 'bin'), import.meta.url), 'bin', { recursive: true }),
-				editjson('package.json', { bin }),
+				cp(new URL(join('..', dirname(bin)), import.meta.url), dirname(bin), { recursive: true }),
+				editjson('package.json', { bin: bin }),
 			])
 		)
 
 const prune = () =>
-	Promise.all([
-		rm('bin', { recursive: true }),
-		editjson('package.json', { bin: undefined }),
-	])
+	readFile('package.json')
+		.then(data => JSON.parse(data))
+		.then(({ bin }) =>
+			Promise.all([
+				rm(dirname(bin), { recursive: true }),
+				editjson('package.json', { bin: undefined }),
+			])
+		)
 
 export default { build, prune }
