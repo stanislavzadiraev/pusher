@@ -1,0 +1,26 @@
+# pusher
+## Установка
+`package.json`:
+ ```js
+ ///...
+  "devDependencies": {
+    ///...
+    "pusher": "github:stanislavzadiraev/pusher",
+    ///...
+  },
+///...
+ ```
+## Подключение
+`package.json`:
+```js
+///...
+  "scripts": {
+    ///...
+    "pusher": "pusher",
+    ///...
+  },
+///...
+```
+параметры:
+- `build` - подключить 
+- `prune` - отключить

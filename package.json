@@ -15,6 +15,7 @@
   "bugs": {
     "url": "https://github.com/stanislavzadiraev/pusher/issues"
   },
+  "dependencies": {},
   "devDependencies": {
     "pusher": "github:stanislavzadiraev/pusher"
   },
