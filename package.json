@@ -1,0 +1,28 @@
+{
+  "name": "pusher",
+  "version": "0.0.2",
+  "keywords": [
+    "not yet"
+  ],
+  "description": "not yet",
+  "license": "ISC",
+  "author": "https://github.com/stanislavzadiraev",
+  "homepage": "https://github.com/stanislavzadiraev/pusher#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stanislavzadiraev/pusher.git"
+  },
+  "bugs": {
+    "url": "https://github.com/stanislavzadiraev/pusher/issues"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "pusher": "github:stanislavzadiraev/pusher"
+  },
+  "scripts": {
+    "pusher": "pusher"
+  },
+  "type": "module",
+  "main": "dst/index.js",
+  "bin": "bin/index.js"
+}
